@@ -1,4 +1,4 @@
-FROM openjdk:10.0.1-10-jre
+FROM openjdk:11-jre
 
 RUN apt-get update && apt-get install -y \
     graphicsmagick \
