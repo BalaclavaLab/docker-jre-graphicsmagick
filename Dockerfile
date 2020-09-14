@@ -1,9 +1,11 @@
 FROM openjdk:14
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
- && yum install -y xz GraphicsMagick \
- && mkdir /usr/src/ffmpeg \
- && cd /usr/src/ffmpeg \
- && curl -o ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
- && tar xf ffmpeg.tar.xz --strip-components=1 \
- && mv ffmpeg ffprobe /usr/local/bin \
- && cd /; rm -rf /var/cache/yum /usr/src/ffmpeg
+RUN mkdir -p mkdir -p /etc/yum/vars \
+  && touch /etc/yum/vars/ociregion \
+  && touch /etc/dnf/dnf.conf \
+  && microdnf install dnf -y \
+  && dnf install -y --nogpgcheck \
+           https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
+	   https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm \
+           https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm \
+  && dnf install -y http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/SDL2-2.0.10-2.el8.x86_64.rpm \
+  && dnf install -y GraphicsMagick ffmpeg
