@@ -1,4 +1,4 @@
-FROM openjdk:16
+FROM openjdk:17
 RUN mkdir -p mkdir -p /etc/yum/vars \
   && touch /etc/yum/vars/ociregion \
   && touch /etc/dnf/dnf.conf \
